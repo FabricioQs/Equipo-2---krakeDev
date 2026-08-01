@@ -8,6 +8,7 @@
 // Cada elemento deberá ser un objeto con las propiedades:
 // nombre, categoria, participantes, valorInscripcion, email y recaudacion.
 let torneos = [];
+let indiceEdicion = -1
 
 /**
  * Actividad 4. Registrar y validar un torneo (30 puntos)
@@ -110,7 +111,10 @@ function mostrarTorneos() {
             <td>$${torneo.valorInscripcion}</td>
             <td>${torneo.email}</td>
             <td>$${torneo.recaudacion}</td>
-            <td><button>Editar</button><button onclick="eliminarTorneo(-1)">Eliminar</button></td>
+            <td>
+                <button onclick="verTarjeta(${i})">Ver</button>
+            </td>
+            <td><button onclick="editarTorneo(0)">Editar</button><button onclick="eliminarTorneo(-1)">Eliminar</button></td>
         </tr>
         `;
     }
@@ -161,11 +165,60 @@ function eliminarTorneo (indice){
     }
 }
 
+function editarTorneo(indice){
+    let torneo = torneos[indice];
+    
+    mostrarTextoEnCaja("nombre",torneo.nombre)
+    mostrarTextoEnCaja("categoria",torneo.categoria)
+    mostrarTextoEnCaja("participantes",torneo.participantes)
+    mostrarTextoEnCaja("valorInscripcion",torneo.valorInscripcion)
+    mostrarTextoEnCaja("email",torneo.email)
+
+    
+}
 
 
+function mostrarTextoEnCaja(idComponente,mensaje){
+        let componente;
+        componente=document.getElementById(idComponente);
+        componente.value=mensaje;
+
+}
 
 
+function limpiar(){
+    limpiarFormulario();
+    torneos = [];
+    mostrarTorneos();
+    document.getElementById("contenedorTarjetas").innerHTML = "";
 
+}
+
+function verTarjeta(indice) {
+
+    let torneo = torneos[indice];
+    let html = `
+        <div class="tarjeta">
+            <h2>${torneo.nombre}</h2>
+            <p><strong>Categoría:</strong> ${torneo.categoria}</p>
+            <p><strong>Participantes:</strong> ${torneo.participantes}</p>
+            <p><strong>Valor inscripción:</strong> $${torneo.valorInscripcion}</p>
+            <p><strong>Email:</strong> ${torneo.email}</p>
+            <p><strong>Recaudación:</strong> $${torneo.recaudacion}</p>
+        </div>
+    `;
+
+    let backdrop = document.getElementById("appModal");
+    backdrop.classList.remove("modal-success", "modal-error", "modal-warning", "modal-info");
+    backdrop.classList.add("modal-info");
+
+    document.getElementById("modalIcon").innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>';
+    document.getElementById("modalTitle").textContent = "Detalle del torneo";
+    document.getElementById("modalMessage").textContent = "";
+    document.getElementById("contenedorTarjetas").innerHTML = html;
+
+    backdrop.classList.add("is-open");
+}
 
 
 
