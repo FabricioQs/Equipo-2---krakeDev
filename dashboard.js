@@ -77,8 +77,16 @@ function registrarTorneo() {
         email: email,
         recaudacion: recaudacion
     };
-// 21. Agregar el objeto al arreglo con push()
-    torneos.push(nuevoTorneo);
+    // 21. Agregar el objeto al arreglo con push()
+    if(indiceEdicion===-1){
+        torneos.push(nuevoTorneo);
+    }else{
+        torneos[indiceEdicion]=nuevoTorneo;
+        indiceEdicion=-1;
+
+    }
+
+   
 // 22. Llamar a mostrarTorneos() y limpiarFormulario()
     mostrarTorneos();
     limpiarFormulario();
@@ -167,13 +175,16 @@ function eliminarTorneo (indice){
 
 function editarTorneo(indice){
     let torneo = torneos[indice];
+    let actulizarDatos = {}
     
-    mostrarTextoEnCaja("nombre",torneo.nombre)
-    mostrarTextoEnCaja("categoria",torneo.categoria)
-    mostrarTextoEnCaja("participantes",torneo.participantes)
-    mostrarTextoEnCaja("valorInscripcion",torneo.valorInscripcion)
-    mostrarTextoEnCaja("email",torneo.email)
+    mostrarTextoEnCaja("nombre",torneo.nombre);
+    mostrarTextoEnCaja("categoria",torneo.categoria);
+    mostrarTextoEnCaja("participantes",torneo.participantes);
+    mostrarTextoEnCaja("valorInscripcion",torneo.valorInscripcion);
+    mostrarTextoEnCaja("email",torneo.email);
 
+    indiceEdicion=indice;
+    
     
 }
 
@@ -184,6 +195,14 @@ function mostrarTextoEnCaja(idComponente,mensaje){
         componente.value=mensaje;
 
 }
+
+function recuperaraTexto(idComponente){
+    let componente;
+    let valorIngresado;
+    componente=document.getElementById(idComponente);
+    valorIngresado=componente.value;
+    return valorIngresado;
+    }
 
 
 function limpiar(){
@@ -219,7 +238,6 @@ function verTarjeta(indice) {
 
     backdrop.classList.add("is-open");
 }
-
 
 
 
