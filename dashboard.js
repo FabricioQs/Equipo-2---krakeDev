@@ -103,13 +103,14 @@ function mostrarTorneos() {
 
 // 28. Mostrar todos los datos y la recaudación calculada
         html += `
-        <tr>
+       <tr>
             <td>${torneo.nombre}</td>
             <td>${torneo.categoria}</td>
             <td>${torneo.participantes}</td>
             <td>$${torneo.valorInscripcion}</td>
             <td>${torneo.email}</td>
             <td>$${torneo.recaudacion}</td>
+            <td><button>Editar</button><button>Eliminar</button></td>
         </tr>
         `;
     }
@@ -146,3 +147,9 @@ function limpiar(){
     mostrarTorneos();
 
 }
+
+
+
+
+
+
