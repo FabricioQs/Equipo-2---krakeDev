@@ -110,7 +110,7 @@ function mostrarTorneos() {
             <td>$${torneo.valorInscripcion}</td>
             <td>${torneo.email}</td>
             <td>$${torneo.recaudacion}</td>
-            <td><button>Editar</button><button>Eliminar</button></td>
+            <td><button>Editar</button><button onclick="eliminarTorneo(-1)">Eliminar</button></td>
         </tr>
         `;
     }
@@ -147,6 +147,26 @@ function limpiar(){
     mostrarTorneos();
 
 }
+
+function eliminarTorneo (indice){
+    const respuesta = confirm("¿Deseas eliminar este elemento?");
+    if (respuesta) {
+    torneos.splice(indice,1)
+    mostrarTorneos()
+    console.log("Acción confirmada");
+    }
+    else {
+    mostrarTorneos()
+    console.log("Acción cancelada");
+    }
+}
+
+
+
+
+
+
+
 
 
 
