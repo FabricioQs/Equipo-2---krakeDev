@@ -89,6 +89,7 @@ function registrarTorneo() {
    
 // 22. Llamar a mostrarTorneos() y limpiarFormulario()
     mostrarTorneos();
+    actualizarEstadisticas();
     limpiarFormulario();
 // 23. Mostrar un mensaje de registro exitoso
     alert("Torneo registrado");
@@ -157,6 +158,7 @@ function limpiar(){
     limpiarFormulario();
     torneos = [];
     mostrarTorneos();
+    actualizarEstadisticas();
 
 }
 
@@ -267,5 +269,23 @@ function buscarTorneos() {
 }
 
 
+function actualizarEstadisticas() {
 
+    let totalTorneos = torneos.length;
+
+    let totalParticipantes = 0;
+    let totalRecaudacion = 0;
+
+    for (let i = 0; i < torneos.length; i++) {
+
+        totalParticipantes += torneos[i].participantes;
+        totalRecaudacion += torneos[i].recaudacion;
+
+    }
+
+    document.getElementById("totalTorneos").textContent = totalTorneos;
+    document.getElementById("totalParticipantes").textContent = totalParticipantes;
+    document.getElementById("totalRecaudacion").textContent = "$" + totalRecaudacion.toFixed(2);
+
+}
 
