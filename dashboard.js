@@ -240,6 +240,31 @@ function verTarjeta(indice) {
 }
 
 
+function buscarTorneos() {
+  let texto = document.getElementById("txtBuscar").value;
+
+  textoF = texto.toLowerCase();
+  let html = "";
+
+  for (let i = 0; i < torneos.length; i++) {
+
+    let torneoB = torneos[i];
+
+    if (torneoB.nombre.toLowerCase().includes(textoF) || torneoB.categoria.toLowerCase().includes(textoF)) {
+      html += `
+       <tr>
+            <td>${torneoB.nombre}</td>
+            <td>${torneoB.categoria}</td>
+            <td>${torneoB.participantes}</td>
+            <td>$${torneoB.valorInscripcion}</td>
+            <td>${torneoB.email}</td>
+            <td>$${torneoB.recaudacion}</td>
+        </tr>
+        `;
+    }
+    document.getElementById("tablaTorneos").innerHTML = html;
+  }
+}
 
 
 
